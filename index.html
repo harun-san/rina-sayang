@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy 20th Birthday, Rina 💖 💖</title>
+<meta name="description" content="A special birthday page for Rina — music, hearts, confetti, and a message to Harun.">
+
+<style>
+  :root{
+    --bg1: #fff7fb;
+    --pink-100: #ffeef8;
+    --pink-200: #ffd6ee;
+    --pink-300: #ff9fd8;
+    --magenta: #ff5fb0;
+    --violet: #b07bff;
+    --muted: #6b4f6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: "Poppins", Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:
+      radial-gradient(800px 500px at 10% 10%, rgba(255,240,249,0.95), transparent 12%),
+      linear-gradient(180deg,var(--pink-100), var(--pink-200) 45%, var(--pink-300));
+    color:var(--muted);
+    overflow:hidden;
+  }
+
+  .stage{
+    position:relative;
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+  }
+
+  .hero{
+    text-align:center;
+    z-index:20;
+    max-width:1100px;
+    width:100%;
+    padding:48px 28px;
+  }
+  h1{
+    color:var(--magenta);
+    font-size:clamp(28px,5vw,56px);
+    line-height:1.02;
+    margin-bottom:8px;
+    animation:enterUp 900ms cubic-bezier(.2,.9,.3,1);
+  }
+  p.lead{
+    font-size:clamp(15px,2.2vw,20px);
+    color:var(--muted);
+    margin-top:8px;
+    opacity:0.95;
+    animation:fadeIn 1400ms ease;
+  }
+
+  .strip{
+    margin-top:22px;
+    display:flex;
+    gap:14px;
+    justify-content:center;
+  }
+  .strip img{
+    width:120px;height:120px;border-radius:14px;object-fit:cover;
+    border:6px solid rgba(255,255,255,0.9);
+    box-shadow:0 18px 50px rgba(176,107,255,0.08);
+    cursor:pointer;
+    transition:transform .36s ease, box-shadow .36s ease;
+  }
+  .strip img:hover{ transform:translateY(-6px) scale(1.04); box-shadow:0 30px 90px rgba(176,107,255,0.12); }
+
+  .msg-col{
+    width:100%;
+    margin-top:30px;
+    padding:20px;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(6px);
+    border-radius:16px;
+    box-shadow:0 18px 60px rgba(176,107,255,0.08);
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+    animation:enterUp 1000ms;
+  }
+  .msg-col h3{ color:var(--magenta); font-size:1.2rem; margin-bottom:8px; }
+  .msg-col label{ display:block; font-size:.9rem; color:var(--muted); margin-bottom:6px; }
+  .msg-col textarea{
+    width:100%; min-height:130px; padding:12px; border-radius:10px; border:0; resize:vertical;
+    box-shadow: inset 0 4px 16px rgba(176,107,255,0.07);
+    font-size:.95rem;
+  }
+  .send-btn{
+    margin-top:12px;
+    background:linear-gradient(90deg,var(--magenta),var(--violet));
+    color:white; border:0; padding:12px 20px; border-radius:10px;
+    font-weight:700; cursor:pointer;
+    box-shadow:0 12px 36px rgba(176,107,255,0.12);
+    float:right;
+  }
+
+  .lightbox{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,0.55); z-index:500 }
+  .lightbox img{ max-width:92%; max-height:86%; border-radius:12px; box-shadow:0 30px 90px rgba(0,0,0,0.6) }
+
+  #effects { position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:2 }
+
+  @keyframes enterUp { from{ transform: translateY(26px); opacity:0 } to{ transform:translateY(0); opacity:1 } }
+  @keyframes fadeIn { from{ opacity:0 } to{ opacity:1 } }
+
+  @media(max-width:640px){
+    .hero{ padding:28px 12px; }
+    .strip img{ width:86px; height:86px; }
+    .msg-col{ padding:16px; }
+  }
+</style>
+</head>
+<body>
+
+<audio id="bg" autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="stage">
+  <div class="hero">
+    <div class="badge" style="display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--magenta),var(--violet));color:white;font-weight:700;font-size:.9rem;margin-bottom:10px;">Untuk Rina ✨ 20</div>
+
+    <h1>Happy 20th Birthday, Rina 💘</h1>
+    <p class="lead">Rinaaa sayang… happy birthday yaa 🥺💗
+Semoga harimu lembut kayak kamu. Senyum yang manis itu jangan hilang, aku kangen banget.
+Peluk jauh dari Harun yang selalu mikirin kamu ~ 😘💞</p>
+
+    <div class="strip">
+      <img src="rina1.jpeg" alt="Rina 1" />
+      <img src="rina2.jpeg" alt="Rina 2" />
+      <img src="rina3.jpeg" alt="Rina 3" />
+      <img src="rina4.jpeg" alt="Rina 4" />
+      <img src="rina5.jpg" alt="Rina 5" />
+    </div>
+
+    <div class="msg-col">
+      <h3>Tulis pesan manis buat Harun ✨ 💌</h3>
+      <textarea id="msg" placeholder="Hai Harun… aku mau cerita sesuatu nih..."></textarea>
+      <button id="send" class="send-btn">📨 Kirim</button>
+      <div style="clear:both"></div>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox"><img src="" alt="Foto besar"></div>
+<canvas id="effects"></canvas>
+
+<script>
+const harun = "6289539276278";
+const bgAudio = document.getElementById('bg');
+bgAudio.volume = 0.35;
+
+/* Lightbox */
+const lb = document.getElementById('lightbox');
+const lbImg = lb.querySelector('img');
+document.querySelectorAll('.strip img').forEach(img => {
+  img.addEventListener('click', ()=>{
+    lbImg.src = img.src;
+    lb.style.display = 'grid';
+  });
+});
+lb.addEventListener('click', ()=> lb.style.display='none');
+
+/* WhatsApp */
+document.getElementById('send').addEventListener('click', ()=>{
+  const val = document.getElementById('msg').value.trim();
+  if(!val) return alert('Tulis pesan dulu ya 💗');
+  const intro = 'Hai Harun, ini pesan dari Rina:';
+  const url = `https://wa.me/${harun}?text=${encodeURIComponent(intro + "\n\n" + val)}`;
+  window.open(url,'_blank');
+});
+
+/* Canvas effects */
+const c = document.getElementById('effects');
+const ctx = c.getContext('2d');
+let W = c.width = innerWidth;
+let H = c.height = innerHeight;
+window.addEventListener('resize', ()=>{ W = c.width = innerWidth; H = c.height = innerHeight; });
+
+const particles = [];
+function rand(a,b){ return Math.random()*(b-a)+a; }
+
+function makePetal(){
+  return {
+    x: rand(0,W),
+    y: -20,
+    r: rand(6,12),
+    vx: rand(-1,1),
+    vy: rand(1,3),
+    life: rand(240,400),
+    col: `hsl(${320+Math.random()*40},80%,70%)`,
+    rot: rand(0,Math.PI*2), spin:rand(-0.04,0.04)
+  };
+}
+
+function makeSpark(){
+  return {
+    x: rand(0,W),
+    y: rand(0,H*0.6),
+    r: rand(1,2),
+    vx: rand(-0.2,0.2), vy: rand(-0.1,0.1),
+    life: rand(80,150),
+    col:'rgba(255,255,255,0.9)'
+  };
+}
+
+function update(){
+  ctx.clearRect(0,0,W,H);
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
+    if(p.r>5){
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle=p.col; ctx.globalAlpha = p.life/400;
+      ctx.beginPath(); ctx.ellipse(0,0,p.r,p.r*0.65,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.spin;
+    } else {
+      ctx.beginPath(); ctx.fillStyle=p.col; ctx.globalAlpha=p.life/150;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      p.x+=p.vx; p.y+=p.vy;
+    }
+    p.life--;
+    if(p.life<=0) particles.splice(i,1);
+  }
+  if(Math.random()<0.25) particles.push(makePetal());
+  if(Math.random()<0.15) particles.push(makeSpark());
+  requestAnimationFrame(update);
+}
+update();
+
+/* Floating emoji */
+function floatEmoji(emoji){
+  const e=document.createElement('div'); e.textContent=emoji;
+  e.style.position='fixed'; e.style.left=rand(6,92)+'vw'; e.style.top='110vh';
+  e.style.fontSize=(20+Math.random()*20)+'px'; e.style.pointerEvents='none';
+  document.body.appendChild(e);
+  e.animate([
+    {transform:'translateY(0)', opacity:1},
+    {transform:'translateY(-120vh)', opacity:0}
+  ],{duration:6000+Math.random()*5000,easing:'cubic-bezier(.2,.8,.2,1)'});
+  setTimeout(()=>e.remove(),9000);
+}
+setInterval(()=>floatEmoji('💖'),1300);
+setInterval(()=>floatEmoji('🎈'),2600);
+</script>
+</body>
+</html>
