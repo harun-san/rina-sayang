@@ -27,13 +27,11 @@
     color:var(--muted);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    /* allow scrolling on small screens */
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     padding-bottom:32px;
   }
 
-  /* STAGE: center content but allow vertical scroll */
   .stage{
     position:relative;
     width:100%;
@@ -44,7 +42,6 @@
     padding:28px 16px;
   }
 
-  /* HERO: content column */
   .hero{
     text-align:center;
     z-index:20;
@@ -72,10 +69,9 @@
     margin-left:auto;
     margin-right:auto;
     text-align:center;
-    white-space:pre-line; /* preserve linebreaks from your text */
+    white-space:pre-line;
   }
 
-  /* Gallery strip, responsive */
   .strip{
     margin-top:20px;
     display:flex;
@@ -100,7 +96,6 @@
     border:6px solid rgba(255,255,255,0.95);
     box-shadow:var(--card-shadow);
     scroll-snap-align:center;
-    background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
   }
   .img-wrap img{
     width:100%;
@@ -112,7 +107,6 @@
   .img-wrap:active img,
   .img-wrap:hover img{ transform:scale(1.03); }
 
-  /* Message column (below hero) */
   .msg-col{
     width:100%;
     margin-top:26px;
@@ -143,14 +137,11 @@
   }
   .clearfix{clear:both}
 
-  /* Lightbox */
   .lightbox{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,0.55); z-index:500; padding:20px }
   .lightbox img{ max-width:100%; max-height:100%; border-radius:12px; box-shadow:0 30px 90px rgba(0,0,0,0.6) }
 
-  /* Canvas for effects */
   #effects { position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:2 }
 
-  /* small screens adjustments */
   @media(max-width:640px){
     .hero{ padding:20px 12px; }
     .img-wrap{ width:86px; height:86px; border-radius:12px; }
@@ -159,20 +150,45 @@
     .strip{ gap:10px; }
   }
 
-  /* animations */
   @keyframes enterUp { from{ transform: translateY(12px); opacity:0 } to{ transform:translateY(0); opacity:1 } }
   @keyframes fadeIn { from{ opacity:0 } to{ opacity:1 } }
 </style>
 </head>
 <body>
 
-<!-- local audio file (replace with your music.mp3 in same folder) -->
-<audio id="bg" playsinline loop>
+<!-- ===== POPUP IZIN MUSIK ===== -->
+<div id="musicPopup"
+  style="
+    position:fixed; inset:0; background:rgba(0,0,0,0.55);
+    display:flex; align-items:center; justify-content:center;
+    z-index:9999;
+  ">
+  <div style="
+    background:white; padding:22px 26px; border-radius:14px;
+    max-width:300px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.25);
+  ">
+    <h3 style="color:#ff5fb0; margin-bottom:10px;">🎶 Izinkan Musik?</h3>
+    <p style="font-size:.9rem; color:#6b4f6b; margin-bottom:16px;">
+      Sentuh tombol di bawah untuk memulai musik latar.
+    </p>
+    <button id="startMusicBtn"
+      style="
+        background:linear-gradient(90deg,#ff5fb0,#b07bff);
+        color:white; border:0; padding:10px 16px;
+        border-radius:10px; font-weight:700; cursor:pointer;
+        box-shadow:0 12px 36px rgba(176,107,255,0.12);
+      ">
+      Putar Musik 🎵
+    </button>
+  </div>
+</div>
+
+<!-- AUDIO (FIXED) -->
+<audio id="bg" preload="auto" playsinline loop>
   <source src="music.mp3" type="audio/mpeg">
-  <!-- fallback: browser will ignore if not supported -->
 </audio>
 
-<div class="stage" role="main" aria-label="Birthday stage">
+<div class="stage" role="main">
   <div class="hero">
     <div class="badge">Untuk Rina ✨ 20</div>
 
@@ -181,15 +197,15 @@
 Semoga harimu lembut kayak kamu. Senyum yang manis itu jangan hilang, aku kangen banget.
 Peluk jauh dari Harun yang selalu mikirin kamu ~ 😘💞</p>
 
-    <div class="strip" aria-hidden="false">
-      <div class="img-wrap"><img src="rina1.jpeg" alt="Rina 1"></div>
-      <div class="img-wrap"><img src="rina2.jpeg" alt="Rina 2"></div>
-      <div class="img-wrap"><img src="rina3.jpeg" alt="Rina 3"></div>
-      <div class="img-wrap"><img src="rina4.jpeg" alt="Rina 4"></div>
-      <div class="img-wrap"><img src="rina5.jpg"  alt="Rina 5"></div>
+    <div class="strip">
+      <div class="img-wrap"><img src="rina1.jpeg"></div>
+      <div class="img-wrap"><img src="rina2.jpeg"></div>
+      <div class="img-wrap"><img src="rina3.jpeg"></div>
+      <div class="img-wrap"><img src="rina4.jpeg"></div>
+      <div class="img-wrap"><img src="rina5.jpg"></div>
     </div>
 
-    <div class="msg-col" id="messageArea">
+    <div class="msg-col">
       <h3>Tulis pesan manis buat Harun ✨ 💌</h3>
       <textarea id="msg" placeholder="Hai Harun… aku mau cerita sesuatu nih..."></textarea>
       <button id="send" class="send-btn">📨 Kirim</button>
@@ -198,51 +214,45 @@ Peluk jauh dari Harun yang selalu mikirin kamu ~ 😘💞</p>
   </div>
 </div>
 
-<div class="lightbox" id="lightbox" aria-hidden="true"><img src="" alt="Foto besar"></div>
-<canvas id="effects" aria-hidden="true"></canvas>
+<div class="lightbox" id="lightbox"><img src=""></div>
+<canvas id="effects"></canvas>
 
 <script>
-/* ========== Config & helper ========== */
 const harun = "62895392762678";
+
+/* ====== FIXED AUDIO PLAY SYSTEM ======= */
+const popup = document.getElementById('musicPopup');
+const startBtn = document.getElementById('startMusicBtn');
 const audio = document.getElementById('bg');
+
 audio.volume = 0.36;
 
-/* autoplay attempts:
-   - try play once immediately
-   - also try play on first user interaction (touchstart/click) which mobile browsers allow
-*/
-function tryPlayAudio(){
-  if(!audio) return;
-  // try play (most browsers will reject if not user-initiated)
-  audio.play().catch(()=> {
-    // ignored; will rely on interaction
-  });
-}
-// try immediate
-tryPlayAudio();
+audio.addEventListener("canplaythrough", () => {
+  console.log("Audio siap diputar");
+});
 
-// play on first user interaction (tap/click)
-function interactionPlay(){
-  tryPlayAudio();
-  window.removeEventListener('touchstart', interactionPlay);
-  window.removeEventListener('click', interactionPlay);
-}
-window.addEventListener('touchstart', interactionPlay, {passive:true});
-window.addEventListener('click', interactionPlay, {passive:true});
+startBtn.addEventListener("click", async () => {
+  try {
+    audio.currentTime = 0;
+    await audio.play();
+    popup.style.display = "none";
+  } catch (err) {
+    alert("Sentuh lagi yaa, musiknya belum siap 😭💗");
+  }
+});
 
-/* ========== Lightbox ========== */
+/* LIGHTBOX */
 const lb = document.getElementById('lightbox');
 const lbImg = lb.querySelector('img');
 document.querySelectorAll('.img-wrap img').forEach(img => {
   img.addEventListener('click', ()=>{
     lbImg.src = img.src;
     lb.style.display = 'grid';
-    lb.setAttribute('aria-hidden','false');
   });
 });
-lb.addEventListener('click', ()=> { lb.style.display='none'; lb.setAttribute('aria-hidden','true'); });
+lb.addEventListener('click', ()=> lb.style.display='none');
 
-/* ========== WhatsApp send ========== */
+/* WHATSAPP SEND */
 document.getElementById('send').addEventListener('click', ()=>{
   const val = document.getElementById('msg').value.trim();
   if(!val) return alert('Tulis pesan dulu ya 💗');
@@ -251,7 +261,7 @@ document.getElementById('send').addEventListener('click', ()=>{
   window.open(url,'_blank');
 });
 
-/* ========== Canvas particle effects (responsive) ========== */
+/* PARTICLES (MASIH SAMA, TIDAK DIUBAH) */
 const canvas = document.getElementById('effects');
 const ctx = canvas.getContext('2d');
 let W = canvas.width = innerWidth;
@@ -336,7 +346,7 @@ function update(){
 }
 update();
 
-/* spawn floating emojis (DOM) but keep light and performant */
+/* EMOJIS */
 function floatEmoji(emoji, interval){
   setInterval(()=>{
     const e=document.createElement('div'); e.textContent=emoji;
@@ -344,17 +354,20 @@ function floatEmoji(emoji, interval){
     e.style.left = rand(6,92)+'vw'; e.style.top = '110vh';
     e.style.fontSize = (14 + Math.random()*22) + 'px'; e.style.zIndex = 12;
     document.body.appendChild(e);
-    e.animate([{transform:'translateY(0)', opacity:1},{transform:`translateY(-${600+Math.random()*420}px)`, opacity:0}],{duration:6000+Math.random()*3000,easing:'cubic-bezier(.2,.8,.2,1)'});
+    e.animate([
+      {transform:'translateY(0)', opacity:1},
+      {transform:`translateY(-${600+Math.random()*420}px)`, opacity:0}
+    ], {duration:6000+Math.random()*3000,easing:'cubic-bezier(.2,.8,.2,1)'});
     setTimeout(()=>e.remove(),9000);
   }, interval);
 }
 floatEmoji('💖', 1400);
 floatEmoji('🎈', 2600);
 
-/* friendly: on orientation change or resize ensure canvas covers */
-window.addEventListener('orientationchange', ()=>{ setTimeout(()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; },200); });
+window.addEventListener('orientationchange', ()=>{ 
+  setTimeout(()=>{ W = canvas.width = innerWidth; H = canvas.height = innerHeight; },200); 
+});
 
-/* fireworks bursts on load for nice effect */
 window.addEventListener('load', ()=> {
   setTimeout(()=> makeConfettiBurst(innerWidth*0.5, innerHeight*0.25), 700);
   setTimeout(()=> makeConfettiBurst(innerWidth*0.6, innerHeight*0.35), 1400);
